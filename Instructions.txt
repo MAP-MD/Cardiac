@@ -1,0 +1,64 @@
+Instructions to apply the tools described in:
+
+% Marciniak, M., Arevalo, H., Tfelt-Hansen, J., Jespersen, T., Jabbari, R., 
+% Glinge, C., Vejlstrup, N., Engstrom, T.,Maleckar, M.M., McLeod, K.: From 
+% MR image to patient-specific simulation and population-based analysis:
+% Tutorial for an openly available image-processing pipeline. Proc. 
+% Statistical Atlases and Computational Models ofthe Heart Workshop, Athens 
+% (2016)
+
+% This program is free software; you can redistribute it and/or modify it 
+% under the terms of the GNU General Public License as published by the 
+% Free Software Foundation; either version 3 of the License, or (at your 
+% option) any later version.
+%
+% This program is distributed in the hope that it will be useful, but 
+% WITHOUT ANY WARRANTY; without even the implied warranty of 
+% MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General 
+% Public License for more details.
+% You should have received a copy of the GNU General Public License along 
+% with this program; if not, write to the Free Software Foundation, Inc., 
+% 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+
+----------------------------------------------------------------------------
+Preparation:
+	This pipeline requires ITK and VTK to be installed:
+	ITK: https://itk.org
+	VTK: http://www.vtk.org
+	Instructions for compiling ITK and VTK can be found on their 
+	websites.
+
+	The ConvertPlyVtkSmooth executable needs to be compiled.
+
+	The ScarProcessing executable needs to be compiled.
+
+	Python also needs to be installed
+
+	Note that some of the Matlab functions might require the Statistics
+	and Machine Learning Toolbox
+
+----------------------------------------------------------------------------
+Step 1:	Perform segmentation using Segment from Medviso: 
+	http://medviso.com/products/segment/
+
+	Following the instructions provided on the Medviso website:
+	http://medviso.com/documents/segment/manual.pdf
+
+----------------------------------------------------------------------------
+Step 2:	Run ‘alignAll.m’ in Matlab or Octave
+	This will perform some pre-processing steps on the point clouds 
+	created in Segment. Note that this pipeline is applicable to LGE
+	segmentation only (i.e. where the scar values have also been 
+	delineated
+
+----------------------------------------------------------------------------
+Step 3:	Run ‘make_surface_all.sh’ in the terminal
+	This creates the surfaces from the point clouds and smoothes the 
+	surfaces
+
+----------------------------------------------------------------------------
+Step 4:	Run the ’ScarProcessing’ executable
+	This will run the post-processing steps to compute a scar mesh from
+	the pre-processed scar computed in Step 2.
+
+----------------------------------------------------------------------------
